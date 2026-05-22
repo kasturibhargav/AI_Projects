@@ -1,0 +1,18 @@
+{
+  "name": "IronTrack Gym Tracker",
+  "short_name": "IronTrack",
+  "description": "Daily gym progress tracker with routines, sessions, calendar, and analytics.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070913",
+  "theme_color": "#070913",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
