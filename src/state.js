@@ -84,7 +84,9 @@ const defaultState = {
   activeSession: null, // null or active session object
   settings: {
     unit: 'kg', // 'kg' or 'lbs'
-    userName: 'Lifter'
+    userName: 'Lifter',
+    googleProfile: null, // null or { name, email, picture, id }
+    googleClientId: '' // custom client id configured by user
   }
 };
 
@@ -311,6 +313,21 @@ export function updateSettings(fields) {
   AppState.settings = { ...AppState.settings, ...fields };
   notify();
 }
+
+export function loginWithGoogle(profile) {
+  AppState.settings.googleProfile = profile;
+  if (profile && profile.name) {
+    AppState.settings.userName = profile.name;
+  }
+  notify();
+}
+
+export function logoutFromGoogle() {
+  AppState.settings.googleProfile = null;
+  AppState.settings.userName = 'Lifter';
+  notify();
+}
+
 
 // DATA EXPORT/IMPORT
 export function exportDataAsJSON() {

@@ -23,9 +23,15 @@ export function initDashboard(onNavigate) {
     const stats = getStats();
 
     // Set user profile details
-    const userName = state.settings.userName || 'Lifter';
-    dashUsername.textContent = userName;
-    dashAvatar.textContent = userName.charAt(0).toUpperCase();
+    if (state.settings.googleProfile) {
+      const profile = state.settings.googleProfile;
+      dashUsername.textContent = profile.name || 'Lifter';
+      dashAvatar.innerHTML = `<img src="${profile.picture}" alt="${profile.name || 'User'}" />`;
+    } else {
+      const userName = state.settings.userName || 'Lifter';
+      dashUsername.textContent = userName;
+      dashAvatar.textContent = userName.charAt(0).toUpperCase();
+    }
 
     // Set stats values
     statWorkouts.textContent = stats.totalWorkouts;

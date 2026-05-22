@@ -10,6 +10,7 @@
     <title>IronTrack - Daily Gym Progress</title>
     <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" href="/src/style.css" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body>
     <!-- Main App Container (Simulating Android Viewport) -->
@@ -183,6 +184,45 @@
               </select>
             </div>
             <button class="btn btn-primary btn-sm" id="btn-save-profile" style="width: 100%;">Save Profile</button>
+          </div>
+
+          <!-- Google Sign In Card -->
+          <div class="card">
+            <h3 class="card-title" style="font-size: 16px; display: flex; align-items: center; gap: 8px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary);"><path d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114A5.962 5.962 0 0 1 8 12.557a5.962 5.962 0 0 1 5.99-5.962c1.65 0 3.146.666 4.259 1.748L21.36 5.23A9.92 9.92 0 0 0 13.99 2.5C8.473 2.5 4 6.973 4 12.557c0 5.583 4.473 10.057 9.99 10.057c5.772 0 10.01-4.057 10.01-10.057c0-.68-.067-1.32-.19-1.929l-11.57-.343z"/></svg>
+              Google Integration
+            </h3>
+            <div id="google-signed-out-zone">
+              <p class="card-subtitle" style="margin-bottom: 16px;">Sign in with Google to personalize your experience. Provide your Client ID or use Demo Mode to test.</p>
+              
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label class="form-label" for="settings-client-id-input">Google Client ID (Optional)</label>
+                <input type="text" id="settings-client-id-input" class="form-control" placeholder="Paste your OAuth Client ID here" />
+                <span style="font-size: 11px; color: var(--text-muted); display: block; margin-top: 6px; line-height: 1.4;">
+                  Required for real authentication. Get it from <a href="https://console.cloud.google.com/" target="_blank" style="color: var(--primary); text-decoration: underline;">Google Cloud Console</a>. Keep blank for Demo simulation.
+                </span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Container for Google Official GSI Button -->
+                <div id="gsi-button-container" style="display: flex; justify-content: center; min-height: 40px;"></div>
+                <button class="btn btn-secondary" id="btn-google-demo-login" style="width: 100%;">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" style="margin-right: 8px;"><path d="M12 11c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm0 4c-2.76 0-5 2.24-5 5v1h10v-1c0-2.76-2.24-5-5-5z"/></svg>
+                  Try Demo Sign-in
+                </button>
+              </div>
+            </div>
+
+            <div id="google-signed-in-zone" style="display: none;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                <img id="google-profile-pic" src="" alt="Google Profile" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary);" />
+                <div style="flex: 1; min-width: 0;">
+                  <div id="google-profile-name" style="font-weight: 600; font-size: 15px; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Name</div>
+                  <div id="google-profile-email" style="font-size: 12px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">email@gmail.com</div>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm" id="btn-google-signout" style="width: 100%;">Sign Out of Google</button>
+            </div>
           </div>
 
           <!-- Backup and Sync -->
