@@ -125,10 +125,11 @@ headerActionBtn.addEventListener('click', () => {
 // Global Google Auth & One Tap Auto-Signin
 function initGlobalGoogleAuth() {
   const state = getAppState();
-  const clientId = state.settings.googleClientId;
+  const clientId = state.settings.googleClientId ? state.settings.googleClientId.trim() : '';
+  const isValidClientId = clientId && clientId.endsWith('.apps.googleusercontent.com');
 
   // If Client ID is specified and user is not logged in, attempt One Tap
-  if (clientId && !state.settings.googleProfile) {
+  if (isValidClientId && !state.settings.googleProfile) {
     if (window.google && window.google.accounts) {
       try {
         window.google.accounts.id.initialize({

@@ -50,9 +50,10 @@ export function initSettings(onStateUpdated) {
     gsiButtonContainer.innerHTML = '';
 
     const state = getAppState();
-    const clientId = state.settings.googleClientId;
+    const clientId = state.settings.googleClientId ? state.settings.googleClientId.trim() : '';
+    const isValidClientId = clientId && clientId.endsWith('.apps.googleusercontent.com');
 
-    if (clientId && window.google && window.google.accounts) {
+    if (isValidClientId && window.google && window.google.accounts) {
       try {
         window.google.accounts.id.initialize({
           client_id: clientId,
@@ -66,8 +67,15 @@ export function initSettings(onStateUpdated) {
         console.error('Error initializing Google GIS:', err);
       }
     } else {
-      // Show hint if Client ID is missing but API is available
-      if (window.google && window.google.accounts) {
+      if (clientId && !isValidClientId) {
+        const warning = document.createElement('div');
+        warning.style.fontSize = '12px';
+        warning.style.color = '#ff6b6b';
+        warning.style.textAlign = 'center';
+        warning.style.lineHeight = '1.4';
+        warning.textContent = 'Invalid Client ID format. Must end with ".apps.googleusercontent.com". Keep blank for Demo Mode.';
+        gsiButtonContainer.appendChild(warning);
+      } else if (window.google && window.google.accounts) {
         const hint = document.createElement('div');
         hint.style.fontSize = '12px';
         hint.style.color = 'var(--text-muted)';
