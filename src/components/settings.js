@@ -1,20 +1,6 @@
 // Settings View Controller
-import { getAppState, updateSettings, exportDataAsJSON, importDataFromJSON, loginWithGoogle, logoutFromGoogle } from '../state.js';
+import { getAppState, updateSettings, exportDataAsJSON, importDataFromJSON, loginWithGoogle, logoutFromGoogle, decodeJwt } from '../state.js';
 
-// Decode client side JWT token for Google profile info
-function decodeJwt(token) {
-  try {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
-  } catch (e) {
-    console.error('Error decoding JWT:', e);
-    return null;
-  }
-}
 
 export function initSettings(onStateUpdated) {
   const usernameInput = document.getElementById('settings-username-input');

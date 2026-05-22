@@ -1,6 +1,6 @@
 // Main Orchestrator File
 import './style.css';
-import { subscribe, loadState, startWorkout } from './state.js';
+import { subscribe, loadState, startWorkout, getAppState, loginWithGoogle, decodeJwt } from './state.js';
 import { initExercisePicker } from './components/exercisePicker.js';
 import { initDashboard } from './components/dashboard.js';
 import { initRoutines } from './components/routines.js';
@@ -122,10 +122,57 @@ headerActionBtn.addEventListener('click', () => {
   navigate('active-session');
 });
 
+// Global Google Auth & One Tap Auto-Signin
+function initGlobalGoogleAuth() {
+  const state = getAppState();
+  const clientId = state.settings.googleClientId;
+
+  // If Client ID is specified and user is not logged in, attempt One Tap
+  if (clientId && !state.settings.googleProfile) {
+    if (window.google && window.google.accounts) {
+      try {
+        window.google.accounts.id.initialize({
+          client_id: clientId,
+          callback: (response) => {
+            const profileData = decodeJwt(response.credential);
+            if (profileData) {
+              const profile = {
+                id: profileData.sub,
+                name: profileData.name,
+                email: profileData.email,
+                picture: profileData.picture
+              };
+              loginWithGoogle(profile);
+              alert(`Welcome back, ${profile.name}!`);
+            }
+          }
+        });
+        
+        // Trigger the Google One Tap prompt
+        window.google.accounts.id.prompt((notification) => {
+          if (notification.isNotDisplayed()) {
+            console.log('One Tap prompt was not displayed:', notification.getNotDisplayedReason());
+          } else if (notification.isSkippedMoment()) {
+            console.log('One Tap moment was skipped:', notification.getSkippedReason());
+          }
+        });
+      } catch (err) {
+        console.error('Failed to initialize Google One Tap on load:', err);
+      }
+    } else {
+      // If Google SDK is not loaded yet, wait and try again
+      setTimeout(initGlobalGoogleAuth, 1000);
+    }
+  }
+}
+
 // Load saved data and initialize
 window.addEventListener('DOMContentLoaded', () => {
   loadState();
   navigate('dashboard');
+  
+  // Run Google One Tap automatic sign-in if configured
+  initGlobalGoogleAuth();
   
   // Register Service Worker for PWA capabilities
   if ('serviceWorker' in navigator) {
@@ -140,3 +187,4 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
