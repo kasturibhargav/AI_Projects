@@ -93,6 +93,21 @@ body {
   }
 }
 
+@media (max-width: 480px) {
+  #app-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: auto;
+    max-width: 100%;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+
 /* Header Area */
 header {
   padding: 20px 24px 12px 24px;
