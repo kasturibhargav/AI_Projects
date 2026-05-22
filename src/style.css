@@ -49,11 +49,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  background-color: var(--bg-main);
 }
 
 body {
@@ -69,6 +65,7 @@ body {
 #app-container {
   width: 100%;
   height: 100%;
+  height: 100svh; /* Short viewport height prevents browser toolbar overlaps */
   max-width: 480px; /* Constrain on desktop like an Android device */
   background-color: var(--bg-main);
   box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
@@ -89,6 +86,10 @@ body {
     background: radial-gradient(circle, rgba(157,78,221,0.12) 0%, rgba(7,9,19,0) 60%);
     z-index: -1;
     pointer-events: none;
+  }
+  #app-container {
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
   }
 }
 
@@ -137,6 +138,7 @@ main {
   padding: 0 20px 24px 20px; /* Padding for content area breathing room */
   scrollbar-width: none; /* Hide scrollbar for clean app interface */
   -webkit-overflow-scrolling: touch; /* Momentum scrolling for mobile browsers */
+  transform: translate3d(0, 0, 0); /* Force GPU acceleration to prevent Safari lockups */
 }
 
 main::-webkit-scrollbar {
@@ -672,6 +674,7 @@ nav.bottom-nav {
   padding: 24px;
   max-height: 85%;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   animation: slideUpSheet 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -944,6 +947,7 @@ nav.bottom-nav {
   margin-top: 14px;
   max-height: 300px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .picker-item {

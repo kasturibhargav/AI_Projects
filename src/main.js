@@ -178,7 +178,8 @@ window.addEventListener('DOMContentLoaded', () => {
   // Register Service Worker for PWA capabilities
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
+      // Use relative path to support subdirectory deployments like GitHub Pages
+      navigator.serviceWorker.register('./sw.js')
         .then(reg => {
           console.log('ServiceWorker registered successfully: ', reg.scope);
         })
