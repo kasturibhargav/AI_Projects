@@ -62,7 +62,7 @@ export function initAnalytics() {
   }
 
   // Custom Line Chart Renderer on Canvas
-  function drawLineChart(canvas, data, labels, color = '#9d4edd', accentColor = '#00f5d4') {
+  function drawLineChart(canvas, data, labels, color = '#f97316', accentColor = '#fde047') {
     const ctx = canvas.getContext('2d');
     
     // Clear and handle DPI scaling
@@ -208,7 +208,7 @@ export function initAnalytics() {
       
       ctx.beginPath();
       ctx.arc(xPoints[i], yPoints[i], 2, 0, 2 * Math.PI);
-      ctx.fillStyle = '#121628';
+      ctx.fillStyle = '#1c1a18';
       ctx.fill();
     });
   }
@@ -267,7 +267,7 @@ export function initAnalytics() {
       ctx.fill();
 
       // Divider line
-      ctx.strokeStyle = '#111425'; // matching var(--bg-card)
+      ctx.strokeStyle = '#1c1a18'; // matching var(--bg-card)
       ctx.lineWidth = 2.5;
       ctx.stroke();
 
@@ -373,7 +373,7 @@ export function initAnalytics() {
     });
 
     // Plot 1RM Trend
-    drawLineChart(canvas1RM, est1RMData, est1RMLabels, '#9d4edd', '#00f5d4');
+    drawLineChart(canvas1RM, est1RMData, est1RMLabels, '#f97316', '#fde047');
 
     // Chart 2: Volume Trend
     const volumeData = [];
@@ -398,7 +398,7 @@ export function initAnalytics() {
     });
 
     // Plot Volume Trend
-    drawLineChart(canvasVolume, volumeData, volumeLabels, '#00d2b4', '#9d4edd');
+    drawLineChart(canvasVolume, volumeData, volumeLabels, '#fde047', '#f97316');
 
     // Chart 3: Muscle Group Distribution Donut Chart
     const muscleCounts = {};

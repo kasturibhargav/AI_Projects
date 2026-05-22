@@ -1,5 +1,5 @@
 // IronTrack Offline Service Worker
-const CACHE_NAME = 'irontrack-cache-v5';
+const CACHE_NAME = 'irontrack-cache-v6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

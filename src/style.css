@@ -2,19 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --bg-main: #070913;
-  --bg-card: rgba(18, 22, 40, 0.65);
-  --bg-card-hover: rgba(26, 32, 58, 0.8);
+  --bg-main: #0d0c0a;
+  --bg-card: rgba(26, 24, 22, 0.65);
+  --bg-card-hover: rgba(36, 33, 30, 0.8);
   --border-color: rgba(255, 255, 255, 0.08);
   
-  --primary: #9d4edd;
-  --primary-glow: rgba(157, 78, 221, 0.35);
-  --primary-dark: #7b2cbf;
+  --primary-rgb: 249, 115, 22;
+  --primary: #f97316;
+  --primary-glow: rgba(249, 115, 22, 0.35);
+  --primary-dark: #ea580c;
   
-  --secondary: #240046;
+  --secondary: #361706;
   
-  --accent: #00f5d4;
-  --accent-glow: rgba(0, 245, 212, 0.25);
+  --accent-rgb: 253, 224, 71;
+  --accent: #fde047;
+  --accent-glow: rgba(253, 224, 71, 0.25);
   
   --success: #10b981;
   --success-glow: rgba(16, 185, 129, 0.25);
@@ -83,7 +85,7 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(157,78,221,0.12) 0%, rgba(7,9,19,0) 60%);
+    background: radial-gradient(circle, rgba(var(--primary-rgb),0.12) 0%, rgba(12,11,10,0) 60%);
     z-index: -1;
     pointer-events: none;
   }
@@ -335,7 +337,7 @@ nav.bottom-nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(157, 78, 221, 0.4);
+  box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.4);
   z-index: 90;
 }
 
@@ -457,7 +459,7 @@ nav.bottom-nav {
   font-size: 18px;
   font-weight: 700;
   color: var(--accent);
-  background: rgba(0, 245, 212, 0.08);
+  background: rgba(var(--accent-rgb), 0.08);
   padding: 4px 10px;
   border-radius: var(--border-radius-sm);
   border: 1px solid var(--accent-glow);
@@ -619,7 +621,7 @@ nav.bottom-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 8px 24px rgba(157, 78, 221, 0.5);
+  box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.5);
   animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   z-index: 95;
 }
@@ -805,8 +807,8 @@ nav.bottom-nav {
 }
 
 .calendar-day.workout-day {
-  background: rgba(157, 78, 221, 0.12);
-  border: 1px solid rgba(157, 78, 221, 0.3);
+  background: rgba(var(--primary-rgb), 0.12);
+  border: 1px solid rgba(var(--primary-rgb), 0.3);
   color: var(--primary);
   font-weight: 700;
 }
